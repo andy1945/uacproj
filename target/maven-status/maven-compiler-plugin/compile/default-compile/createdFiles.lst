@@ -1,0 +1,13 @@
+ugaidc/co/ug/entities/Userdata_.class
+ugaidc/co/ug/api/service/ApiuserFacadeREST.class
+ugaidc/co/ug/utilities/JsfUtil.class
+ugaidc/co/ug/api/service/UserdataFacadeREST.class
+ugaidc/co/ug/entities/Apiuser.class
+ugaidc/co/ug/entities/Userdata.class
+ugaidc/co/ug/utilities/Utils.class
+ugaidc/co/ug/api/servlets/ConsoleServlet.class
+ugaidc/co/ug/api/service/AbstractFacade.class
+ugaidc/co/ug/api/servlets/RegisterServelet.class
+ugaidc/co/ug/entities/Apiuser_.class
+ugaidc/co/ug/api/model/ResponseUsers.class
+ugaidc/co/ug/api/servlets/Index.class
