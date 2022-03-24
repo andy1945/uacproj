@@ -6,6 +6,7 @@ package ugaidc.co.ug.api.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URISyntaxException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -14,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
 
 /**
  *
@@ -28,6 +30,16 @@ public class ConsoleServlet extends HttpServlet {
     jsp = context.getRequestDispatcher("/views/console.jsp");
 
   }
+
+  /**
+   *
+   * @param request
+   * @param response
+   * @throws ServletException
+   * @throws IOException
+   * @throws URISyntaxException
+   * @throws OAuthSystemException
+   */
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
@@ -42,6 +54,11 @@ public class ConsoleServlet extends HttpServlet {
   }
 
   /**
+   *  @Override
+  protected void doGet(HttpServletRequest request, HttpServletResponse response)
+          throws ServletException, IOException,URISyntaxException, OAuthSystemException {
+    
+  }
    * Returns a short description of the servlet.
    *
    * @return a String containing servlet description

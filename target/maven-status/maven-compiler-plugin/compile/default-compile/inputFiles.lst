@@ -2,6 +2,7 @@
 /Users/andrew/workspace/NetbeanProjects/UGAIDC/src/main/java/ugaidc/co/ug/entities/Userdata.java
 /Users/andrew/workspace/NetbeanProjects/UGAIDC/src/main/java/ugaidc/co/ug/utilities/Utils.java
 /Users/andrew/workspace/NetbeanProjects/UGAIDC/src/main/java/ugaidc/co/ug/api/service/AbstractFacade.java
+/Users/andrew/workspace/NetbeanProjects/UGAIDC/src/main/java/org/netbeans/rest/application/config/ApplicationConfig.java
 /Users/andrew/workspace/NetbeanProjects/UGAIDC/src/main/java/ugaidc/co/ug/api/model/ResponseUsers.java
 /Users/andrew/workspace/NetbeanProjects/UGAIDC/src/main/java/ugaidc/co/ug/entities/Apiuser.java
 /Users/andrew/workspace/NetbeanProjects/UGAIDC/src/main/java/ugaidc/co/ug/api/servlets/RegisterServelet.java

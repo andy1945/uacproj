@@ -39,14 +39,14 @@ public class UserdataFacadeREST extends AbstractFacade<Userdata> {
   }
 
   @POST
-  @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+  @Consumes({MediaType.APPLICATION_JSON})
   public void create(@Suspended final AsyncResponse asyncResponse, Userdata entity) {
     asyncResponse.resume(doCreate(entity));
   }
 
   @PUT
-  @Path("{id}")
-  @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+  @Path("edit/{id}")
+  @Consumes({MediaType.APPLICATION_JSON})
   public void edit(@PathParam("id") Integer id, Userdata entity) {
     super.edit(entity);
   }
@@ -59,21 +59,21 @@ public class UserdataFacadeREST extends AbstractFacade<Userdata> {
 
   @GET
   @Path("{id}")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+  @Produces({MediaType.APPLICATION_JSON})
   public Userdata find(@PathParam("id") Integer id) {
     return super.find(id);
   }
 
   @GET
   @Override
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+  @Produces({MediaType.APPLICATION_JSON})
   public List<Userdata> findAll() {
     return super.findAll();
   }
 
   @GET
   @Path("{from}/{to}")
-  @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+  @Produces({MediaType.APPLICATION_JSON})
   public List<Userdata> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
     return super.findRange(new int[]{from, to});
   }
@@ -89,8 +89,8 @@ public class UserdataFacadeREST extends AbstractFacade<Userdata> {
   protected EntityManager getEntityManager() {
     return em;
   }
-  
-    public ResponseUsers doLogin(Userdata access) {
+
+  public ResponseUsers doLogin(Userdata access) {
     ResponseUsers results = new ResponseUsers();
 
     if (UsernameExixts(access.getUsername())) {
@@ -116,28 +116,32 @@ public class UserdataFacadeREST extends AbstractFacade<Userdata> {
 
   public ResponseUsers doCreate(Userdata user) {
     ResponseUsers r = new ResponseUsers();
-    
+
     if (EmailExixts(user.getEmail())) {
       r.setIsError(true);
       r.setMessage("Email already exists");
 
-    }
-    
-    user.setPassword(Utils.signUp(user.getUsername(), user.getPassword()));
-    super.create(user);
-
-    if (em.contains(user)) {
-      r.setIsError(false);
-      r.setMessage("Success");
-
-    }else{
+    } else if (UsernameExixts(user.getUsername())) {
       r.setIsError(true);
-      r.setMessage("Fields missing");
+      r.setMessage("Username already exists");
+    } else {
+
+      user.setPassword(Utils.signUp(user.getUsername(), user.getPassword()));
+      super.create(user);
+
+      if (em.contains(user)) {
+        r.setIsError(false);
+        r.setMessage("Success");
+
+      } else {
+        r.setIsError(true);
+        r.setMessage("Fields missing");
+      }
     }
     return r;
   }
-  
-     public boolean UsernameExixts(String username) {
+
+  public boolean UsernameExixts(String username) {
 
     if (getEntityManager().createNamedQuery("Userdata.findByUsername").setParameter("username",
             username).getResultList().size() > 0) {
@@ -146,8 +150,8 @@ public class UserdataFacadeREST extends AbstractFacade<Userdata> {
       return false;
     }
   }
-  
-    public boolean EmailExixts(String email) {
+
+  public boolean EmailExixts(String email) {
 
     if (getEntityManager().createNamedQuery("Userdata.findByEmail").setParameter("email",
             email).getResultList().size() > 0) {
@@ -156,7 +160,8 @@ public class UserdataFacadeREST extends AbstractFacade<Userdata> {
       return false;
     }
   }
-    public Userdata findByUsername(String username) {
+
+  public Userdata findByUsername(String username) {
 
     return (Userdata) getEntityManager().createNamedQuery("Userdata.findByUsername").setParameter("username",
             username).getSingleResult();

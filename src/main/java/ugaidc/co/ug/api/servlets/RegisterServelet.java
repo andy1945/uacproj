@@ -86,7 +86,7 @@ public class RegisterServelet extends HttpServlet {
     ResponseUsers respo = userdataFacadeREST.doCreate(user);
     
     if(respo.isIsError()){
-        request.setAttribute("suc", "Your account was successfully created click Login");
+        request.setAttribute("err", respo.getMessage());
     request.getRequestDispatcher("/views/register.jsp").forward(request, response);
     }else{
        request.setAttribute("suc", "Your account was successfully created click Login");
